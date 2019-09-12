@@ -143,6 +143,7 @@ def spaceman(secret_word):
                 if guesses_left == 0:
                     print("YOU LOST")
                     print(guesses_left)
+                    #I'm using the function play_again below and at the bottom of the while loop to let the user restart or quit
                     play_again()
             show_me = get_guessed_word(secret_word, guessed_letters)
             print(show_me)
