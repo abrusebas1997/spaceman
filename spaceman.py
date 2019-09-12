@@ -9,7 +9,7 @@ def load_word():
            string: The secret word to be used in the spaceman guessing game
     '''
     f = open('words.txt', 'r') #r keep the file open
-    words_list = f.readlines()
+    words_list = f.readlines() #f.readlines is reading all the words in my word.txt
     f.close()
 
     words_list = words_list[0].split(' ') #comment this line out if you use a words.txt file with each word on a new line
@@ -56,8 +56,6 @@ def get_guessed_word(secret_word, guessed_letters):
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
 
     #pass
-
-
 def is_guess_in_word(guess, secret_word):
     '''
     A function to check if the guessed letter is in the secret word
@@ -75,10 +73,23 @@ def is_guess_in_word(guess, secret_word):
         return False
 
 def is_guess_in_letters(guess, guessed_letters):
+    '''
+    A function to check if the guess is e letters
+    '''
     if guess in guessed_letters:
         return True
     else:
         return False
+
+def play_again():
+
+    play_again = False
+    answer = input('Game is over, would you like to play again? (Y/N)')
+    if answer == 'Y' or 'yes':
+        play_again = True
+    else:
+        quit()
+
 
 
 
@@ -118,40 +129,27 @@ def spaceman(secret_word):
         else:
             guessed_letters.append(guess)
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
-            underscore = is_guess_in_word(guess, secret_word)
-            if underscore == True:
+            letter_inside_secret_word = is_guess_in_word(guess, secret_word)
+            if letter_inside_secret_word == True:
                 print("The letter you guess is correct")
             else:
                 guesses_left -= 1
                 print("The letter you guess is not correct")
+                #TODO: show the guessed word so far
                 print("Letters guessed so far", guessed_letters)
                 alphabet.remove(guess)
                 print("letters remaining:", "".join(alphabet))
+                #TODO: check if the game has been won or lost
                 if guesses_left == 0:
                     print("YOU LOST")
-                    break
+                    print(guesses_left)
+                    play_again()
             show_me = get_guessed_word(secret_word, guessed_letters)
             print(show_me)
             print(guesses_left)
     if is_word_guessed(secret_word, guessed_letters) == True:
         print("YOU WIN")
-
-secret_word = load_word()
-spaceman(secret_word)
-answer = input('Would you like to play again Y/N: ')
-while answer == 'Y' or answer == 'y':
-   secret_word = load_word()
-   spaceman(secret_word)
-   answer = input('Would you like to play again Y/N: ')
-
-    #TODO: show the guessed word so far
-
-
-
-    #TODO: check if the game has been won or lost
-
-
-
+        play_again()
 
 
 
