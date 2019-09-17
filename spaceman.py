@@ -88,10 +88,7 @@ def play_again():
     if answer == 'Y' or 'yes':
         play_again = True
     else:
-        quit()
-
-
-
+        spaceman(secret_word)
 
 def spaceman(secret_word):
     # alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -143,6 +140,7 @@ def spaceman(secret_word):
                 if guesses_left == 0:
                     print("YOU LOST")
                     print(guesses_left)
+                    print("Your secret word was" + " '" + secret_word + "' ")
                     #I'm using the function play_again below and at the bottom of the while loop to let the user restart or quit
                     play_again()
             show_me = get_guessed_word(secret_word, guessed_letters)
@@ -150,6 +148,7 @@ def spaceman(secret_word):
             print(guesses_left)
     if is_word_guessed(secret_word, guessed_letters) == True:
         print("YOU WIN")
+        print("Your secret word was" + " " + secret_word + " ")
         play_again()
 
 
